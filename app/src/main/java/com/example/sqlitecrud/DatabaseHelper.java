@@ -2,10 +2,14 @@ package com.example.sqlitecrud;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -47,5 +51,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(STUDENT_TABLE,null,cv);
 
         return true;
+    }
+
+
+    public List<StudentModel> getEveryone(){
+
+        List<StudentModel> returnList = new ArrayList<>();
+        //get data from database
+
+        String queryString = "SELECT * FROM"+ STUDENT_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString);
+
+        if(cursor.moveToFirst()){
+            do{
+                int STUDENT_ID = cursor.getInt(0);
+
+
+
+            }while (cursor.moveToFirst());
+
+
+
+        }
     }
 }

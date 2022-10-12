@@ -2,13 +2,14 @@ package com.example.sqlitecrud;
 
 public class StudentModel {
     String name, course, email;
-    int age;
+    int age,id;
 
-    public StudentModel(String name, String course, String email, int age) {
+    public StudentModel(int id,String name, String course, String email, int age) {
         this.name = name;
         this.course = course;
         this.email = email;
         this.age = age;
+        this.id = id;
     }
 
     public String getName() {

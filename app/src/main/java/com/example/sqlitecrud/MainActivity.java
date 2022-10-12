@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 String studentEmail = edtEmail.getText().toString();
 
 
-                StudentModel studentModel = new StudentModel(studentName,studentCourse,studentEmail,studentAge);
+                StudentModel studentModel = new StudentModel(1,studentName,studentCourse,studentEmail,studentAge);
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this,"SB",null,1);
                 try {
