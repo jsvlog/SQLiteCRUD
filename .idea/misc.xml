@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/win8/AndroidStudioProjects/SQLiteCRUD/app/src/main/res/drawable/for_cardview.xml" value="0.177" />
         <entry key="..\:/Users/win8/AndroidStudioProjects/SQLiteCRUD/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.177" />
         <entry key="..\:/Users/win8/AndroidStudioProjects/SQLiteCRUD/app/src/main/res/layout/activity_main.xml" value="0.2703125" />
         <entry key="..\:/Users/win8/AndroidStudioProjects/SQLiteCRUD/app/src/main/res/layout/adding_recyclerview.xml" value="0.2703125" />
+        <entry key="..\:/Users/win8/AndroidStudioProjects/SQLiteCRUD/app/src/main/res/layout/layout_for_recyclerview.xml" value="0.2703125" />
       </map>
     </option>
   </component>

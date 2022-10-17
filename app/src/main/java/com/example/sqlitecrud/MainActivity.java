@@ -2,6 +2,7 @@ package com.example.sqlitecrud;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -13,9 +14,14 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     RecyclerView recycler;
     FloatingActionButton fab;
+    RecyAdapter myAdapter;
+    List<StudentModel> students;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +38,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(linearLayoutManager);
+
+        DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this,"SB",null,1);
+
+        students = databaseHelper.getEveryone();
+
+        myAdapter = new RecyAdapter(students,this);
+        recycler.setAdapter(myAdapter);
+
+
+
+
     }
 
 
 
+    //On click Fab this will execute
     private void addValueRecyclerView() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -65,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                 String studentCourse = edtCourse.getText().toString();
                 String studentEmail = edtEmail.getText().toString();
 
-
+                //ito ay para sa pag add sa database, na ilalagay sa databasehelper.addone
                 StudentModel studentModel = new StudentModel(1,studentName,studentCourse,studentEmail,studentAge);
-
+                //kelangan ma initialize muna ang database helper bago ito lagyan ng data galing sa model
                 DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this,"SB",null,1);
                 try {
+                    //ito ang process ng paglalagay ng data sa databacse
                     databaseHelper.addOne(studentModel);
                     Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
@@ -77,8 +102,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+               myAdapter.setData(students);
                 }
+
         });
+
+
 
 
 

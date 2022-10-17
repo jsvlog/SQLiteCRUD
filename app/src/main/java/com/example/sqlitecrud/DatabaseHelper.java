@@ -50,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.insert(STUDENT_TABLE,null,cv);
 
+
         return true;
     }
 
@@ -59,20 +60,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<StudentModel> returnList = new ArrayList<>();
         //get data from database
 
-        String queryString = "SELECT * FROM"+ STUDENT_TABLE;
+        String queryString = ("SELECT * FROM ") + STUDENT_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString);
+        Cursor cursor = db.rawQuery(queryString,null);
 
         if(cursor.moveToFirst()){
             do{
-                int STUDENT_ID = cursor.getInt(0);
+                int studentId = cursor.getInt(0);
+                String studentName = cursor.getString(1);
+                int studentAge = cursor.getInt(2);
+                String studentCourse = cursor.getString(3);
+                String studentEmail = cursor.getString(4);
+
+                StudentModel studentModel = new StudentModel(studentId,studentName,studentCourse,studentEmail,studentAge);
+                returnList.add(studentModel);
+
+
+            }while (cursor.moveToNext());
 
 
 
-            }while (cursor.moveToFirst());
-
-
-
+        }else{
+            //its an empty list
         }
+
+        // close both the cursor and db when done.s
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public boolean deleteOne(int i){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + STUDENT_TABLE + " WHERE " + " INDEX = " + i;
+        db.rawQuery(queryString,null);
+        return true;
     }
 }
